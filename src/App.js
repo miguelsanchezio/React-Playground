@@ -8,7 +8,20 @@ class App extends Component {
       { name: 'Miguel', age: 24 },
       { name: 'Ana', age: 23 },
       { name: 'Yesi', age: 28 },      
-    ]
+    ],
+    otherState: 'Other state.'
+  }
+
+  switchNameHandler = () => {
+    // console.log('Was clicked.');
+    // DON'T DO THIS this.state.persons[0].name = 'Mike';
+    this.setState({
+      persons: [
+        { name: 'Mike', age: 24 },
+        { name: 'Banana', age: 23 },
+        { name: 'Old Lady', age: 28 }
+      ]
+    })
   }
 
   render() {
@@ -16,10 +29,10 @@ class App extends Component {
       <div className="App">
         <h1>Hi.</h1>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-        <button>Switch Name</button>
+        <button onClick={this.switchNameHandler}>Switch Name</button>
         <Person name={this.state.persons[0].name} age={this.state.persons[0].age}/>
         <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>My Hobbies: Racing</Person>
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age}/>   
+        <Person name={this.state.persons[2].name} age={this.state.persons[2].age}/>
       </div>
     );
   }
