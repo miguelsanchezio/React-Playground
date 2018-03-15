@@ -5,21 +5,30 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     persons: [
-      { name: 'Miguel', age: 24 },
-      { name: 'Ana', age: 23 },
-      { name: 'Yesi', age: 28 },      
+      { id: 1, name: 'Miguel', age: 24 },
+      { id: 2, name: 'Ana', age: 23 },
+      { id: 3, name: 'Yesi', age: 28 },      
     ],
     otherState: 'Other state.',
     showPeople: false
   }
 
-  nameChangedHandler = e => {
+  nameChangedHandler = (e, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
+
+    const person = {
+      ...this.state.persons[personIndex]
+    }
+
+    person.name = e.target.value;
+
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
     this.setState({
-      persons: [
-        { id: 1, name: 'Miguel', age: 24 },
-        { id: 2, name: e.target.value, age: 23 },
-        { id: 3, name: 'Old Lady', age: 28 }
-      ]
+      persons: persons
     });
   }
 
@@ -36,9 +45,10 @@ class App extends Component {
 
   render() {
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
-      border: '1px solid orange',
+      border: '1px solid black',
       padding: '8px',
       cursor: 'pointer'
     };
@@ -52,10 +62,13 @@ class App extends Component {
               click={() => this.deletePersonHandler(index)}
               name={person.name}
               age={person.age}
+              changed={e => this.nameChangedHandler(e, person.id)}
               key={person.id} />
           })}
         </div>
       );
+
+      style.backgroundColor = 'orangered';
     };
 
     return (
