@@ -9,7 +9,8 @@ class App extends Component {
       { name: 'Ana', age: 23 },
       { name: 'Yesi', age: 28 },      
     ],
-    otherState: 'Other state.'
+    otherState: 'Other state.',
+    showPeople: false
   }
 
   switchNameHandler = (newName) => {
@@ -34,6 +35,11 @@ class App extends Component {
     });
   }
 
+  togglePeopleHander = () => {
+    const doesShow = this.state.showPeople;
+    this.setState({ showPeople: !doesShow});
+  }
+
   render() {
     const style = {
       backgroundColor: 'white',
@@ -46,20 +52,25 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Hi.</h1>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-        <button style={style} onClick={() => this.switchNameHandler('Alejandro')}>Switch Name</button>
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}/>
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, 'Karen')}
-          changed={this.nameChangedHandler}
-          >My Hobbies: Racing</Person>
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age}/>
+        <p>I'm a React Application.</p>
+        <button style={style} onClick={this.togglePeopleHander}>Toggle People</button>
+        { 
+          this.state.showPeople ?
+            <div>
+              <Person
+                name={this.state.persons[0].name}
+                age={this.state.persons[0].age}/>
+              <Person
+                name={this.state.persons[1].name}
+                age={this.state.persons[1].age}
+                click={this.switchNameHandler.bind(this, 'Karen')}
+                changed={this.nameChangedHandler}
+                >My Hobbies: Racing</Person>
+              <Person
+                name={this.state.persons[2].name}
+                age={this.state.persons[2].age}/>
+            </div> : null
+        }
       </div>
     );
   }
