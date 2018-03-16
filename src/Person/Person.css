@@ -10,3 +10,9 @@
 input {
   padding: 5px;
 }
+
+@media (min-width: 600px) {
+  .Person {
+    width: 450px;
+  }
+}
