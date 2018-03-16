@@ -1,9 +1,10 @@
 import React from 'react';
+import classes from './Person.css'
 import './Person.css';
 
 const Person = (props) => {
   return (
-		<div className='Person'>
+		<div className={classes.Person}>
 			<p onClick={props.click}>I'm a {props.name} and I am {props.age} years old.</p>
 			<p>{props.children}</p>
 			<input onChange={props.changed} type="text" value={props.name}/>
