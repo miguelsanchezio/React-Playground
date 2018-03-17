@@ -15,7 +15,10 @@ class Person extends Component {
   }
 
   componentDidMount() {
-    console.log('[Person.js] Inside componentDidMount()');
+		console.log('[Person.js] Inside componentDidMount()');
+		if(this.props.position === 0) {
+			this.inputElement.focus();
+		}
 	}
 	
 	componentWillReceiveProps(nextProps) {
@@ -29,7 +32,11 @@ class Person extends Component {
 			<React.Fragment>
 				<p onClick={this.props.click}>I'm a {this.props.name} and I am {this.props.age} years old.</p>
 				<p>{this.props.children}</p>
-				<input onChange={this.props.changed} type="text" value={this.props.name}/>
+				<input
+					ref={inp => { this.inputElement = inp }}
+					onChange={this.props.changed}
+					type="text"
+					value={this.props.name}/>
 			</React.Fragment>
 		)
 	}
